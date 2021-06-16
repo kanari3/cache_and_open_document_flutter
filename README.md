@@ -1,16 +1,27 @@
-# save_cache_file_flutter
+# cache_and_open_document_flutter sample
 
-A new Flutter project.
+Save temporary directory and open it!  
+Support Android and iOS.
 
-## Getting Started
+# cache directories
+- Android (example)
+```
+/data/user/0/{APPLICATION_ID}/cache
+```
 
-This project is a starting point for a Flutter application.
+- iOS
+```
+/data/Containers/Data/Application/{APPLICATION_ID}/Library/Caches
+```
 
-A few resources to get you started if this is your first Flutter project:
+# Libraries
+use the following
+- path_provider
+- open_file
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Unnecessary access control
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Not required change AndoidManifest.xml and Info.plist.
+
+# Note
+The famous library `launch_url` did not work.
