@@ -1,5 +1,5 @@
-name: save_cache_file_flutter
-description: A new Flutter project.
+name: cache_and_open_document_flutter
+description: save chache and open document sample
 
 publish_to: 'none'
 

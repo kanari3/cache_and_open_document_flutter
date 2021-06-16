@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.save_cache_file_flutter">
+    package="com.example.cache_and_open_document_flutter">
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="save_cache_file_flutter"
+        android:label="cache_and_open_document_flutter"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
