@@ -1,4 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +39,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<Directory> _externalDocumentsDirectory;
   Future<List<Directory>> _externalStorageDirectories;
   Future<List<Directory>> _externalCacheDirectories;
-
+  
+  Future<String> _downloadDocument() async {
+    // public sample pdf
+    final url = 'https://www.kansaigaidai.ac.jp/asp/img/pdf/82/7a79c35f7ce0704dec63be82440c8182.pdf';
+    final filename = "renamed-document.pdf";
+    final request = await HttpClient().getUrl(Uri.parse(url));
+    final response = await request.close();
+    final bytes = await consolidateHttpClientResponseBytes(response);
+    final savePath = '${(await getTemporaryDirectory()).path}/$filename';
+    final file = File(savePath);
+    file.writeAsBytesSync(bytes);
+    return file.path;
+  }
+  
   void _requestTempDirectory() {
     setState(() {
       _tempDirectory = getTemporaryDirectory();
@@ -117,6 +136,16 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 30, left: 16, right: 16, bottom: 60),
+              child: ElevatedButton(
+                child: const Text('Download and Open Document'),
+                onPressed: () async {
+                  final path = await _downloadDocument();
+                  await OpenFile.open(path);
+                },
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
